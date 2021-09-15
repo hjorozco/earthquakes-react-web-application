@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './components/NavBar';
 import {
-  BrowserRouter,
+  HashRouter,
   Switch,
   Route,
 } from "react-router-dom";
@@ -9,7 +9,7 @@ import {
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
 
       <NavBar />
 
@@ -28,7 +28,7 @@ const App = () => {
         </Route>
       </Switch>
 
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
