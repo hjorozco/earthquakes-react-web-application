@@ -1,6 +1,6 @@
 {
   "name": "earthquakes",
-  "homepage": "http://hjorozco.github.io/earthquakes-react-web-application",
+  "homepage": "https://hjorozco.github.io/earthquakes-react-web-application",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
