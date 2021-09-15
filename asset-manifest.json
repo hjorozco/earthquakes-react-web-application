@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/earthquakes-react-web-application/static/css/main.529aaf2c.chunk.css",
+    "main.js": "/earthquakes-react-web-application/static/js/main.e02b46cb.chunk.js",
+    "main.js.map": "/earthquakes-react-web-application/static/js/main.e02b46cb.chunk.js.map",
+    "runtime-main.js": "/earthquakes-react-web-application/static/js/runtime-main.fd2d72d0.js",
+    "runtime-main.js.map": "/earthquakes-react-web-application/static/js/runtime-main.fd2d72d0.js.map",
+    "static/js/2.fbdec961.chunk.js": "/earthquakes-react-web-application/static/js/2.fbdec961.chunk.js",
+    "static/js/2.fbdec961.chunk.js.map": "/earthquakes-react-web-application/static/js/2.fbdec961.chunk.js.map",
+    "index.html": "/earthquakes-react-web-application/index.html",
+    "static/css/main.529aaf2c.chunk.css.map": "/earthquakes-react-web-application/static/css/main.529aaf2c.chunk.css.map",
+    "static/js/2.fbdec961.chunk.js.LICENSE.txt": "/earthquakes-react-web-application/static/js/2.fbdec961.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fd2d72d0.js",
+    "static/js/2.fbdec961.chunk.js",
+    "static/css/main.529aaf2c.chunk.css",
+    "static/js/main.e02b46cb.chunk.js"
+  ]
+}
