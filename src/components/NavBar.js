@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import deleteIcon from '../logo.svg';
+
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 
@@ -7,8 +9,8 @@ const NavBar = () => {
     let history = useHistory();
 
     // When Navigation Bar mounts, make the browser navigate to the home page
-    useEffect(() => { 
-        history.push("/"); 
+    useEffect(() => {
+        history.push("/");
     }, [history]);
 
     // State: Array that holds a boolean for each of the options on the Navigation Bar. That boolean
@@ -40,6 +42,9 @@ const NavBar = () => {
     return (
         <nav className="NavBar">
             <ul>
+                <li className="LogoContainer">
+                    <img className="Logo" width="40" height="40" src={deleteIcon} alt="App logo" />
+                </li>
                 <li id="0" onClick={handleClick} style={background(0)}>
                     <Link to="/">
                         <span style={fontWeight(0)}>Earthquakes</span>
