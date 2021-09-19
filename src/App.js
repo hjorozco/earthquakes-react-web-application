@@ -10,30 +10,45 @@ import {
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 
+// Go to https://geolocation-db.com/ for information about this API
+const GEOLOCATION_DB_API = "https://geolocation-db.com/json/";
+
+// Go to https://earthquake.usgs.gov/fdsnws/event/1/ for information about this API
+const USGS_API = "https://earthquake.usgs.gov/fdsnws/event/1/query";
+
+
 const App = () => {
 
+  // TODO
+
+  // State that holds the data returned from the USGS API. Go to 
+  // https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php to see the data format.
   const [earthquakesData, setEarthquakesData] = useState({});
 
+  // State that holds the status of a fetch operation ("loading", "succesful" or "failed")
   const [status, setStatus] = useState("loading");
 
+  // State that holds the data of the earthquake selected by the user on the list of earthquakes
   const [selectedEarthquake, setSelectedEarthquake] = useState({});
 
+  // State that holds the values of the filters that the user can use to filter the earthquakes shown
+  // on the list
   const [filters, setFilters] = useState({
     minMagnitude: 6,
     maxMagnitude: 10,
     getCloseEarthquakes: false,
   });
 
+  // State that holds the location (latitude and longitude) of the browser. 
   const [location, setLocation] = useState({});
 
+  // State that holds a boolean indicating if the location was fetched successfully (true) or not (false)
   const [locationAvailable, setLocationAvailable] = useState(true);
 
   // When the App component mounts, fetch earthquakes data and location
   useEffect(() => {
     console.log("Fetching data on mount")
-    // Fetch data from the USGS API
     fetchDataFromUSGS();
-    // Fetch data from the GeoLocation API
     fetchDataFromGeoAPI();
   }, []);
 
@@ -56,7 +71,6 @@ const App = () => {
   const updateEarthquakes = () => {
     console.log("Fetching data on update");
     setStatus("loading");
-    // Fetch data from the USGS API
     fetchDataFromUSGS();
   }
 
@@ -80,6 +94,8 @@ const App = () => {
     });
   }
 
+  // Since the location returned from this API is only an approximation, and it does not use the 
+  // browser's HTML5 location API, it is not required to ask for permission from the user.
   const fetchDataFromGeoAPI = () => {
     fetchData().then(result => {
       if (result !== null) {
@@ -129,7 +145,8 @@ const App = () => {
 export default App;
 
 /**
- * Asynchronous funtion that fetches data from an API.
+ * Asynchronous funtion that fetches data from an API. Used for fetching data from both, USGS API and 
+ * GeoLocation API, based on the number of arguments passed to the function.
  * @param  {...any} args Arguments passed to the function.
  * @returns A JSON object containing the data fetched, or null if an error occurs.
  */
@@ -139,13 +156,13 @@ const fetchData = async (...args) => {
 
   if (args.length === 0) {
     // Fetch data from the GeoLocation API.
-    fetchUrl = "https://geolocation-db.com/json/";
+    fetchUrl = GEOLOCATION_DB_API;
   } else {
     // Fetch data from USGS API.
     let limit = 20000;
     let minMagnitude = args[0][0];
     let maxMagnitude = args[0][1];
-    const usgsEarthquakesApiEndpoint = "https://earthquake.usgs.gov/fdsnws/event/1/query";
+    const usgsEarthquakesApiEndpoint = USGS_API;
     const queryParameters =
       `?format=geojson&limit=${limit}&minmagnitude=${minMagnitude}&maxmagnitude=${maxMagnitude}`
       + "&orderby=time";

@@ -26,7 +26,6 @@
 .Logo {
   animation: shake 2s;
   animation-iteration-count: infinite;
-  margin-left: 20px;
 }
 
 .Input {
@@ -70,10 +69,6 @@
   margin-top: 20px;
   font-size: small;
   text-align: center;
-}
-
-.map{
-  height: 100vh;
 }
 
 @keyframes shake {

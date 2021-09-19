@@ -27,7 +27,8 @@ const EarthquakesList = props => {
     }
 
     return (
-        <div className="EarthquakesList">
+        <div 
+        className="EarthquakesList">
             {content}
         </div>
 
