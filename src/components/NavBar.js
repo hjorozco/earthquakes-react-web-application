@@ -1,5 +1,4 @@
-import deleteIcon from '../logo.svg';
-
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
@@ -42,27 +41,19 @@ const NavBar = () => {
     return (
         <nav className="NavBar">
             <ul>
-                <li className="LogoContainer">
-                    <img className="Logo" width="40" height="40" src={deleteIcon} alt="App logo" />
-                </li>
                 <li id="0" onClick={handleClick} style={background(0)}>
                     <Link to="/">
                         <span style={fontWeight(0)}>Earthquakes</span>
                     </Link>
                 </li>
                 <li id="1" onClick={handleClick} style={background(1)}>
-                    <Link to="/pinned">
-                        <span style={fontWeight(1)}>Pinned</span>
+                    <Link to="/glosary">
+                        <span style={fontWeight(1)}>Glosary</span>
                     </Link>
                 </li>
                 <li id="2" onClick={handleClick} style={background(2)}>
-                    <Link to="/glosary">
-                        <span style={fontWeight(2)}>Glosary</span>
-                    </Link>
-                </li>
-                <li id="3" onClick={handleClick} style={background(3)}>
                     <Link to="/contact">
-                        <span style={fontWeight(3)}>Contact</span>
+                        <span style={fontWeight(2)}>Contact</span>
                     </Link>
                 </li>
             </ul>
