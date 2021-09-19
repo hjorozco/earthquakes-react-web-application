@@ -1,21 +1,7 @@
 {
-  "files": {
-    "main.css": "/earthquakes-react-web-application/static/css/main.99a16efb.chunk.css",
-    "main.js": "/earthquakes-react-web-application/static/js/main.9beef7fd.chunk.js",
-    "main.js.map": "/earthquakes-react-web-application/static/js/main.9beef7fd.chunk.js.map",
-    "runtime-main.js": "/earthquakes-react-web-application/static/js/runtime-main.fd2d72d0.js",
-    "runtime-main.js.map": "/earthquakes-react-web-application/static/js/runtime-main.fd2d72d0.js.map",
-    "static/js/2.7e993f96.chunk.js": "/earthquakes-react-web-application/static/js/2.7e993f96.chunk.js",
-    "static/js/2.7e993f96.chunk.js.map": "/earthquakes-react-web-application/static/js/2.7e993f96.chunk.js.map",
-    "index.html": "/earthquakes-react-web-application/index.html",
-    "static/css/main.99a16efb.chunk.css.map": "/earthquakes-react-web-application/static/css/main.99a16efb.chunk.css.map",
-    "static/js/2.7e993f96.chunk.js.LICENSE.txt": "/earthquakes-react-web-application/static/js/2.7e993f96.chunk.js.LICENSE.txt",
-    "static/media/logo.65f56ea8.svg": "/earthquakes-react-web-application/static/media/logo.65f56ea8.svg"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.fd2d72d0.js",
-    "static/js/2.7e993f96.chunk.js",
-    "static/css/main.99a16efb.chunk.css",
-    "static/js/main.9beef7fd.chunk.js"
-  ]
+  "main.css": "static/css/main.7afe4683.css",
+  "main.css.map": "static/css/main.7afe4683.css.map",
+  "main.js": "static/js/main.c7ce33b0.js",
+  "main.js.map": "static/js/main.c7ce33b0.js.map",
+  "static\\media\\logo.svg": "static/media/logo.edc44a09.svg"
 }
