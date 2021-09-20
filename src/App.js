@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useReducer, useRef } from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import EarthquakesPage from './components/earthquakePage/EarthquakesPage';
@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
+import PinnedPage from './components/pinnedPage/PinnedPage';
 
 // Go to https://geolocation-db.com/ for information about this API
 const GEOLOCATION_DB_API = "https://geolocation-db.com/json/";
@@ -16,10 +17,29 @@ const GEOLOCATION_DB_API = "https://geolocation-db.com/json/";
 // Go to https://earthquake.usgs.gov/fdsnws/event/1/ for information about this API
 const USGS_API = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
+const PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY = "pinned-earthquakes";
+
+// Context used to pass pinnedEarthquakes data and dispatch to children.
+export const PinnedEarthquakesDispatch = createContext(null);
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "initialize":
+      return action.payload;
+    case "add":
+      return [...state, action.payload];
+    case "remove":
+      return state.filter(feature => !feature.properties.ids.includes(action.payload.id));
+    default:
+      throw new Error("Invalid action type");
+  }
+}
+
 
 const App = () => {
 
-  // TODO
+  // State that holds an array with the earthquakes pinned by the user.
+  let [pinnedEarthquakes, dispatch] = useReducer(reducer, [])
 
   // State that holds the data returned from the USGS API. Go to 
   // https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php to see the data format.
@@ -45,12 +65,24 @@ const App = () => {
   // State that holds a boolean indicating if the location was fetched successfully (true) or not (false)
   const [locationAvailable, setLocationAvailable] = useState(true);
 
-  // When the App component mounts, fetch earthquakes data and location
+  // When the App component mounts, fetch earthquakes data, fetch location data, and read pinned
+  // earthquakes data from storage. 
   useEffect(() => {
-    console.log("Fetching data on mount")
+    readPinnedEarthquakesFromLocalStorage();
     fetchDataFromUSGS();
     fetchDataFromGeoAPI();
   }, []);
+
+  // When "pinnedEarthquakes" state changes, save it to localStorage
+  let mount = useRef();
+  useEffect(() => {
+    if (!mount.current) {
+      mount.current = true;
+      return;
+    }
+    console.log("pinnedEarthquakes saved to local storage");
+    localStorage.setItem(PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY, JSON.stringify(pinnedEarthquakes));
+  }, [pinnedEarthquakes]);
 
   const handleFiltersChange = e => {
     if (e.target.id === "getCloseEarthquakes") {
@@ -62,16 +94,27 @@ const App = () => {
   }
 
   const handleEarthquakeClick = index => {
+    let feature = earthquakesData.features[index]
     setSelectedEarthquake({
-      feature: earthquakesData.features[index],
+      feature: feature,
       index: index,
+      isPinned:
+        pinnedEarthquakes.some(
+          pinnedEarthquake => pinnedEarthquake.properties.ids.includes(feature.id))
     });
   }
 
   const updateEarthquakes = () => {
     console.log("Fetching data on update");
     setStatus("loading");
+    setSelectedEarthquake({});
     fetchDataFromUSGS();
+  }
+
+  const changeSelectedEarthquakePinnedStatus = () => {
+    let tempSelectedEarthquake = { ...selectedEarthquake };
+    tempSelectedEarthquake.isPinned = !tempSelectedEarthquake.isPinned;
+    setSelectedEarthquake(tempSelectedEarthquake);
   }
 
   const fetchDataFromUSGS = () => {
@@ -82,10 +125,6 @@ const App = () => {
     fetchData(usgsArguments).then(result => {
       if (result !== null) {
         setEarthquakesData(result);
-        setSelectedEarthquake({
-          feature: result.features[0],
-          index: 0,
-        })
         setStatus("successful");
       } else {
         setEarthquakesData({});
@@ -110,12 +149,23 @@ const App = () => {
     });
   }
 
+  const readPinnedEarthquakesFromLocalStorage = () => {
+    let pinnedString = localStorage.getItem(PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY);
+    let pinnedArray = pinnedString !== null ? JSON.parse(pinnedString) : [];
+    dispatch({ type: "initialize", payload: pinnedArray });
+  }
+
   return (
     <HashRouter>
 
       <NavBar />
 
       <Switch>
+        <Route path="/pinned">
+          <PinnedEarthquakesDispatch.Provider value={{ pinnedEarthquakes, dispatch }}>
+            <PinnedPage />
+          </PinnedEarthquakesDispatch.Provider>
+        </Route>
         <Route path="/glosary">
           <Glosary />
         </Route>
@@ -123,16 +173,19 @@ const App = () => {
           <Contact />
         </Route>
         <Route path="/">
-          <EarthquakesPage
-            status={status}
-            earthquakesData={earthquakesData}
-            selectedEarthquake={selectedEarthquake}
-            handleEarthquakeClick={handleEarthquakeClick}
-            updateEarthquakes={updateEarthquakes}
-            handleFiltersChange={handleFiltersChange}
-            filters={filters}
-            locationAvailable={locationAvailable}
-          />
+          <PinnedEarthquakesDispatch.Provider value={dispatch}>
+            <EarthquakesPage
+              status={status}
+              earthquakesData={earthquakesData}
+              selectedEarthquake={selectedEarthquake}
+              handleEarthquakeClick={handleEarthquakeClick}
+              updateEarthquakes={updateEarthquakes}
+              handleFiltersChange={handleFiltersChange}
+              filters={filters}
+              locationAvailable={locationAvailable}
+              changeSelectedEarthquakePinnedStatus={changeSelectedEarthquakePinnedStatus}
+            />
+          </PinnedEarthquakesDispatch.Provider>
         </Route>
       </Switch>
 

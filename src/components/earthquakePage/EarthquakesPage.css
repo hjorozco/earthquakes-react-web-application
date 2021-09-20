@@ -2,7 +2,7 @@
     width: 100vw;
     height: 90vh;
     display: grid;
-    grid-template: 50px 50px 1fr / 60% 40%;
+    grid-template: 50px 50px 1fr / 6fr 4fr;
 }
 
 .EarthquakesTitle {
@@ -54,8 +54,7 @@
 .EarthquakesList {
     /* Brown 900 */
     color: #3E2723;
-    display: flex;
-    grid-row: 3/5;
+    grid-row: 3 / 5;
     overflow: auto;
     padding: 10px;
     margin: 20px;
@@ -73,7 +72,12 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
     cursor: pointer;
-    grid-template: 1fr / 40% 60%
+    grid-template: 1fr / 4fr 6fr;
+}
+
+.temp{
+    width: 100%;
+    border: 1px solid;
 }
 
 .EarthquakesListItem:hover {
@@ -157,7 +161,7 @@
 
 @media (max-width: 930px) {
     .EarthquakesPage {
-        grid-template: 50px 50px 1fr / 50% 50%;
+        grid-template: 50px 50px 1fr / 1fr 1fr;
     }
 }
 
@@ -166,7 +170,7 @@
         width: 100vw;
         height: 150vh;
         display: grid;
-        grid-template: 50px 50px 1fr 1fr / 100%;
+        grid-template: 50px 50px 1fr 1fr / 1fr;
     }
     .EarthquakesTitle {
         font-size: large;

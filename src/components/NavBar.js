@@ -47,13 +47,18 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li id="1" onClick={handleClick} style={background(1)}>
-                    <Link to="/glosary">
-                        <span style={fontWeight(1)}>Glosary</span>
+                    <Link to="/pinned">
+                        <span style={fontWeight(1)}>Pinned</span>
                     </Link>
                 </li>
                 <li id="2" onClick={handleClick} style={background(2)}>
+                    <Link to="/glosary">
+                        <span style={fontWeight(2)}>Glosary</span>
+                    </Link>
+                </li>
+                <li id="3" onClick={handleClick} style={background(3)}>
                     <Link to="/contact">
-                        <span style={fontWeight(2)}>Contact</span>
+                        <span style={fontWeight(3)}>Contact</span>
                     </Link>
                 </li>
             </ul>

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+import { PinnedEarthquakesDispatch } from '../../App'
 
 import map from '../../images/map.svg';
 import webPage from '../../images/webPage.svg';
@@ -12,17 +14,30 @@ const EarthquakeDetails = props => {
     const pinImageSize = "35";
 
     let content;
-    let showDetails = props.status === "successful" && props.feature !== undefined;
+    let showDetails = props.status === "successful" && props.selectedEarthquake.feature !== undefined;
+
+    const dispatch = useContext(PinnedEarthquakesDispatch);
+
+    const handlePinIconClick = (isPinned) => {
+        isPinned ?
+            dispatch({ type: "remove", payload: props.selectedEarthquake.feature }) :
+            dispatch({ type: "add", payload: props.selectedEarthquake.feature })
+        props.changeSelectedEarthquakePinnedStatus();
+    }
 
     if (showDetails) {
-        let properties = props.feature.properties;
-        let coordinates = props.feature.geometry.coordinates;
+        let properties = props.selectedEarthquake.feature.properties;
+        let coordinates = props.selectedEarthquake.feature.geometry.coordinates;
+        let isPinned = props.selectedEarthquake.isPinned;
         content =
             <div>
                 <div className="DetailsIcons">
-                    <img className="Icon PinIcon" widht={pinImageSize} alt="Pin icon"
-                        height={pinImageSize} src={pinned}>
-                    </img>
+                    <Tooltip title={isPinned ? "Unpin" : "Pin"} arrow>
+                        <img className="Icon PinIcon" widht={pinImageSize} alt="Pin icon"
+                            height={pinImageSize} src={isPinned ? pinned : notPinned}
+                            onClick={() => handlePinIconClick(isPinned)}>
+                        </img>
+                    </Tooltip>
                 </div>
                 <div className="DetailLabel">Magnitude on Ritcher scale</div>
                 <div className="Detail">
@@ -70,11 +85,11 @@ const EarthquakeDetails = props => {
                 </div>
 
                 <div className="Detail LastDetail">
-                    
+
                     <div>
                         {properties["url"] === null ?
                             "No map available" :
-                            <a href={properties.url+"/map"} target="_blank">
+                            <a href={properties.url + "/map"} target="_blank">
                                 <img
                                     className="Icon MapIcon" widht={mapImageSize} height={mapImageSize}
                                     src={map} alt="Map icon">
@@ -85,7 +100,7 @@ const EarthquakeDetails = props => {
                 </div>
 
                 <div className="Detail LastDetail">
-                <div>
+                    <div>
                         {properties["url"] === null ?
                             "No more details available" :
                             <a href={properties.url} target="_blank">
@@ -96,7 +111,7 @@ const EarthquakeDetails = props => {
                             </a>}
                     </div>
                     <div className="DetailLabel LastDetailLabel">More details</div>
-                    
+
                 </div>
 
             </div>

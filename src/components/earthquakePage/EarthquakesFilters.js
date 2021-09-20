@@ -57,7 +57,9 @@ class EarthquakesFilters extends React.Component {
                         </div>
                     </Tooltip> :
                     null}
-                <button className="Button SubmitButton" type="submit">Update</button>
+                <Tooltip title="Update earthquakes list" arrow>
+                    <button className="Button SubmitButton" type="submit">Update</button>
+                </Tooltip>
             </form>
         );
     }

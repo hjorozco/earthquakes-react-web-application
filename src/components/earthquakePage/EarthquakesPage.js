@@ -21,7 +21,11 @@ const EarthquakesPage = props => {
                 selectedEarthquakeIndex={props.selectedEarthquake.index}
                 handleEarthquakeClick={props.handleEarthquakeClick}
             />
-            <EarthquakeDetails status={props.status} feature={props.selectedEarthquake.feature} />
+            <EarthquakeDetails
+                status={props.status}
+                selectedEarthquake={props.selectedEarthquake}
+                changeSelectedEarthquakePinnedStatus= {props.changeSelectedEarthquakePinnedStatus}
+            />
         </div>
     );
 }
