@@ -2,7 +2,6 @@ import React from 'react';
 import EarthquakeDetails from './EarthquakeDetails';
 import EarthquakesFilters from './EarthquakesFilters';
 import EarthquakesList from './EarthquakesList';
-import './EarthquakesPage.css'
 
 const EarthquakesPage = props => {
 

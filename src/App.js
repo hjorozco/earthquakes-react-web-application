@@ -20,7 +20,7 @@ const USGS_API = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 const PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY = "pinned-earthquakes";
 
 // Context used to pass pinnedEarthquakes state and dispatch to children.
-export const PinnedEarthquakesDispatch = createContext(null);
+export const PinnedEarthquakesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -50,6 +50,10 @@ const App = () => {
 
   // State that holds the data of the earthquake selected by the user on the list of earthquakes
   const [selectedEarthquake, setSelectedEarthquake] = useState({});
+
+  // State that holds the data of the pinned earthquake selected by the user on the list of pinned 
+  // earthquakes
+  const [selectedPinnedEarthquake, setSelectedPinnedEarthquake] = useState({});
 
   // State that holds the values of the filters that the user can use to filter the earthquakes shown
   // on the list
@@ -82,6 +86,11 @@ const App = () => {
     }
     console.log("pinnedEarthquakes saved to local storage");
     localStorage.setItem(PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY, JSON.stringify(pinnedEarthquakes));
+    if (selectedEarthquake.feature !== undefined)
+      setSelectedEarthquake({
+        ...selectedEarthquake, isPinned: pinnedEarthquakes.some(
+          pinnedEarthquake => pinnedEarthquake.properties.ids.includes(selectedEarthquake.feature.id))
+      });
   }, [pinnedEarthquakes]);
 
   const handleFiltersChange = e => {
@@ -104,6 +113,13 @@ const App = () => {
     });
   }
 
+  const handlePinnedEarthquakeClick = index => {
+    setSelectedPinnedEarthquake({
+      feature: pinnedEarthquakes[index],
+      index: index,
+    });
+  }
+
   const updateEarthquakes = () => {
     console.log("Fetching data on update");
     setStatus("loading");
@@ -115,6 +131,7 @@ const App = () => {
     let tempSelectedEarthquake = { ...selectedEarthquake };
     tempSelectedEarthquake.isPinned = !tempSelectedEarthquake.isPinned;
     setSelectedEarthquake(tempSelectedEarthquake);
+    setSelectedPinnedEarthquake({});
   }
 
   const fetchDataFromUSGS = () => {
@@ -162,9 +179,12 @@ const App = () => {
 
       <Switch>
         <Route path="/pinned">
-          <PinnedEarthquakesDispatch.Provider value={{ pinnedEarthquakes, dispatch }}>
-            <PinnedPage />
-          </PinnedEarthquakesDispatch.Provider>
+          <PinnedEarthquakesContext.Provider value={{ pinnedEarthquakes, dispatch }}>
+            <PinnedPage
+              selectedPinnedEarthquake={selectedPinnedEarthquake}
+              handlePinnedEarthquakeClick={handlePinnedEarthquakeClick}
+              setSelectedPinnedEarthquake={setSelectedPinnedEarthquake} />
+          </PinnedEarthquakesContext.Provider>
         </Route>
         <Route path="/glosary">
           <Glosary />
@@ -173,7 +193,7 @@ const App = () => {
           <Contact />
         </Route>
         <Route path="/">
-          <PinnedEarthquakesDispatch.Provider value={dispatch}>
+          <PinnedEarthquakesContext.Provider value={dispatch}>
             <EarthquakesPage
               status={status}
               earthquakesData={earthquakesData}
@@ -185,7 +205,7 @@ const App = () => {
               locationAvailable={locationAvailable}
               changeSelectedEarthquakePinnedStatus={changeSelectedEarthquakePinnedStatus}
             />
-          </PinnedEarthquakesDispatch.Provider>
+          </PinnedEarthquakesContext.Provider>
         </Route>
       </Switch>
 

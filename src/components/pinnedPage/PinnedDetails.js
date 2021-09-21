@@ -5,37 +5,33 @@ import { PinnedEarthquakesContext } from '../../App'
 import map from '../../images/map.svg';
 import webPage from '../../images/webPage.svg';
 import pinned from '../../images/pinned.svg';
-import notPinned from '../../images/notPinned.svg';
 
-const EarthquakeDetails = props => {
+const PinnedDetails = props => {
 
     const webPageImageSize = "20";
     const mapImageSize = "30"
     const pinImageSize = "35";
 
     let content;
-    let showDetails = props.status === "successful" && props.selectedEarthquake.feature !== undefined;
+    let showDetails = props.selectedPinnedEarthquake.feature !== undefined;
 
-    const dispatch = useContext(PinnedEarthquakesContext);
+    const context = useContext(PinnedEarthquakesContext);
 
-    const handlePinIconClick = (isPinned) => {
-        isPinned ?
-            dispatch({ type: "remove", payload: props.selectedEarthquake.feature }) :
-            dispatch({ type: "add", payload: props.selectedEarthquake.feature })
-        props.changeSelectedEarthquakePinnedStatus();
+    const handlePinIconClick = () => {
+        context.dispatch({ type: "remove", payload: props.selectedPinnedEarthquake.feature })
+        props.setSelectedPinnedEarthquake({});
     }
 
     if (showDetails) {
-        let properties = props.selectedEarthquake.feature.properties;
-        let coordinates = props.selectedEarthquake.feature.geometry.coordinates;
-        let isPinned = props.selectedEarthquake.isPinned;
+        let properties = props.selectedPinnedEarthquake.feature.properties;
+        let coordinates = props.selectedPinnedEarthquake.feature.geometry.coordinates;
         content =
             <div>
                 <div className="DetailsIcons">
-                    <Tooltip title={isPinned ? "Unpin" : "Pin"} arrow>
+                    <Tooltip title="Unpin" arrow>
                         <img className="Icon PinIcon" widht={pinImageSize} alt="Pin icon"
-                            height={pinImageSize} src={isPinned ? pinned : notPinned}
-                            onClick={() => handlePinIconClick(isPinned)}>
+                            height={pinImageSize} src={pinned}
+                            onClick={() => handlePinIconClick()}>
                         </img>
                     </Tooltip>
                 </div>
@@ -115,7 +111,9 @@ const EarthquakeDetails = props => {
                 </div>
 
             </div>
-    } 
+    } else {
+        content = <div>Here details will be shown</div>
+    }
 
     return (
         <fieldset className="EarthquakeDetails">
@@ -125,4 +123,4 @@ const EarthquakeDetails = props => {
     );
 }
 
-export default EarthquakeDetails;
+export default PinnedDetails;
