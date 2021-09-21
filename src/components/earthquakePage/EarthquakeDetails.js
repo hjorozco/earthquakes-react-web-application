@@ -115,7 +115,9 @@ const EarthquakeDetails = props => {
                 </div>
 
             </div>
-    } 
+    } else {
+        content = <div className="NoDetailsMessage">Click on an earthquake of the list to see its details here.</div>
+    }
 
     return (
         <fieldset className="EarthquakeDetails">

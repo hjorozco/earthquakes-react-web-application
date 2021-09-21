@@ -55,17 +55,20 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.BoldText{
+.BoldText {
   font-weight: bold;
 }
 
-.Footer{
+.Footer {
   margin: 20px;
   font-size: small;
   text-align: center;
+  color: black;
 }
 
 .EarthquakesPage {
+  /* Brown 700 */
+  color: #5D4037;
   width: 100%;
   height: 90vh;
   display: grid;
@@ -78,18 +81,15 @@
   display: flex;
   align-items: center;
   padding: 0px 20px;
-  /* Brown 700 */
-  color: #5D4037;
   grid-column: 1 / 3;
 }
 
 .EarthquakesFilters {
-  /* Brown 700 */
-  color: #5D4037;
   display: flex;
   align-items: center;
   margin: 0px 20px;
   grid-column: 1 / 3;
+  font-weight: 500;
 }
 
 .MagnitudeContainer {
@@ -131,20 +131,10 @@
   border-radius: 10px;
 }
 
-.EarhquakesListTitle {
-  display: flex;
-  align-items: baseline;
-  margin-bottom: 20px;
-}
-
 .Status {
   font-weight: 500;
   font-style: italic;
-}
-
-.ClickMessage {
-  font-size: small;
-  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 .EarthquakesListItem {
@@ -213,6 +203,24 @@
   align-items: center;
 }
 
+.NoDetailsMessage {
+  margin-top: 20px;
+  font-size: small;
+}
+
+.AboutPage {
+  /* Brown 700 */
+  color: #5D4037;
+  margin: 20px;
+  position: relative;
+}
+
+.AboutParagraph {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-indent: 10px;
+}
+
 .Icon:hover {
   cursor: pointer;
 }
@@ -236,6 +244,24 @@
 
 .PinIcon:active {
   border-radius: 5px;
+}
+
+.Background {
+  position: relative;
+}
+
+.Background:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background-image: url('./images/earthquakeBackground.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @keyframes shake {
@@ -276,24 +302,24 @@
 
 @media (max-width: 930px) {
   .EarthquakesPage {
-      grid-template: 50px 50px 1fr / 1fr 1fr;
+    grid-template: 50px 50px 1fr / 1fr 1fr;
   }
 }
 
 @media (max-width: 660px) {
   .EarthquakesPage {
-      width: 100%;
-      height: 150vh;
-      display: grid;
-      grid-template: 50px 50px 1fr 1fr / 1fr;
+    width: 100%;
+    height: 150vh;
+    display: grid;
+    grid-template: 50px 50px 1fr 1fr / 1fr;
   }
   .EarthquakesTitle {
-      font-size: large;
+    font-size: large;
   }
   .EarthquakesList {
-      grid-row: 3 / 4
+    grid-row: 3 / 4
   }
   .EarthquakeDetails {
-      grid-row: 4 / 5;
+    grid-row: 4 / 5;
   }
 }

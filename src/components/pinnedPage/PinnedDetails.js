@@ -112,7 +112,7 @@ const PinnedDetails = props => {
 
             </div>
     } else {
-        content = <div>Here details will be shown</div>
+        content = <div className="NoDetailsMessage">Click on an earthquake of the list to see its details here.</div>
     }
 
     return (

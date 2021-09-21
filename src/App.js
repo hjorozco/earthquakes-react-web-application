@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import PinnedPage from './components/pinnedPage/PinnedPage';
+import AboutPage from './components/abutPage/AboutPage';
 
 // Go to https://geolocation-db.com/ for information about this API
 const GEOLOCATION_DB_API = "https://geolocation-db.com/json/";
@@ -24,7 +25,7 @@ export const PinnedEarthquakesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "initialize":
+    case "set":
       return action.payload;
     case "add":
       return [...state, action.payload];
@@ -84,7 +85,6 @@ const App = () => {
       mount.current = true;
       return;
     }
-    console.log("pinnedEarthquakes saved to local storage");
     localStorage.setItem(PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY, JSON.stringify(pinnedEarthquakes));
     if (selectedEarthquake.feature !== undefined)
       setSelectedEarthquake({
@@ -169,7 +169,7 @@ const App = () => {
   const readPinnedEarthquakesFromLocalStorage = () => {
     let pinnedString = localStorage.getItem(PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY);
     let pinnedArray = pinnedString !== null ? JSON.parse(pinnedString) : [];
-    dispatch({ type: "initialize", payload: pinnedArray });
+    dispatch({ type: "set", payload: pinnedArray });
   }
 
   return (
@@ -186,11 +186,8 @@ const App = () => {
               setSelectedPinnedEarthquake={setSelectedPinnedEarthquake} />
           </PinnedEarthquakesContext.Provider>
         </Route>
-        <Route path="/glosary">
-          <Glosary />
-        </Route>
-        <Route path="/contact">
-          <Contact />
+        <Route path="/about">
+          <AboutPage/>
         </Route>
         <Route path="/">
           <PinnedEarthquakesContext.Provider value={dispatch}>
@@ -263,12 +260,4 @@ const fetchData = async (...args) => {
   } catch (e) {
     return null;
   }
-}
-
-function Glosary(props) {
-  return <h2>Glosary</h2>;
-}
-
-function Contact(props) {
-  return <h2>Contact</h2>;
 }

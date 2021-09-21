@@ -13,15 +13,11 @@ const PinnedList = props => {
         <div
             className="EarthquakesList">
             <div>
-                <div className="EarhquakesListTitle">
-                    <div className="Status">
-                        {context.pinnedEarthquakes.length} pinned earthquakes.
-                    </div>
-                    <div className="ClickMessage">
-                        {context.pinnedEarthquakes.length > 0 ?
-                            "Click on an earthquake to see its details." : ""}
-                    </div>
+
+                <div className="Status">
+                    {context.pinnedEarthquakes.length} pinned earthquakes
                 </div>
+
                 {context.pinnedEarthquakes.map((feature, index) =>
                     <div id={index} key={index} className="EarthquakesListItem"
                         onClick={() => props.handlePinnedEarthquakeClick(index)}
@@ -35,6 +31,7 @@ const PinnedList = props => {
                         <div className="EarthquakeListItemDate">{String(new Date(feature.properties.time))}</div>
                     </div>)}
             </div>
+
         </div>
 
     );
