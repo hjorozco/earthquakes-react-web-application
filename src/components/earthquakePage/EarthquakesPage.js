@@ -8,7 +8,7 @@ const EarthquakesPage = props => {
 
     return (
         <div className="EarthquakesPage">
-            <div className="EarthquakesTitle">Latest earthquakes in the world</div>
+            <div className="EarthquakesTitle">Earthquakes in last 30 days</div>
             <EarthquakesFilters
                 updateEarthquakes={props.updateEarthquakes}
                 handleFiltersChange={props.handleFiltersChange}

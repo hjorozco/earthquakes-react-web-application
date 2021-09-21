@@ -46,7 +46,7 @@ class EarthquakesFilters extends React.Component {
                 {this.props.locationAvailable ?
                     <Tooltip title="Show earthquakes within a 2,000 km radius" arrow>
                         <div>
-                            <label htmlFor="getCloseEarthquakes">Close</label>
+                            <label htmlFor="getCloseEarthquakes">Close to you</label>
                             <input
                                 id="getCloseEarthquakes"
                                 className="Input"

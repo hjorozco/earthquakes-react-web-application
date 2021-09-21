@@ -19,7 +19,7 @@ const USGS_API = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
 const PINNED_EARTHQUAKES_LOCAL_STORAGE_KEY = "pinned-earthquakes";
 
-// Context used to pass pinnedEarthquakes data and dispatch to children.
+// Context used to pass pinnedEarthquakes state and dispatch to children.
 export const PinnedEarthquakesDispatch = createContext(null);
 
 const reducer = (state, action) => {

@@ -27,8 +27,9 @@ const EarthquakesList = props => {
     }
 
     return (
-        <div 
-        className="EarthquakesList">
+        <div
+            className="EarthquakesList"
+            style={props.status === "loading" ? { display: "flex" } : null}>
             {content}
         </div>
 

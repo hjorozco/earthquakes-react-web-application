@@ -8,8 +8,14 @@ const List = props => {
 
     return (
         <div>
-            <div className="status">
-                {props.earthquakesData.metadata.count} earthquakes on the last 30 days.
+            <div className="EarhquakesListTitle">
+                <div className="Status">
+                    {props.earthquakesData.metadata.count} earthquakes.
+                </div>
+                <div className="ClickMessage">
+                    {props.earthquakesData.metadata.count > 0 ?
+                        "Click on an earthquake to see its details." : ""}
+                </div>
             </div>
             {props.earthquakesData.features.map((feature, index) =>
                 <div id={index} key={index} className="EarthquakesListItem"

@@ -115,15 +115,13 @@ const EarthquakeDetails = props => {
                 </div>
 
             </div>
-    }
+    } 
 
     return (
-        <div
-            className="EarthquakeDetails"
-            style={showDetails ? { boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" } : { border: "none" }}
-        >
+        <fieldset className="EarthquakeDetails">
+            <legend>Details</legend>
             {content}
-        </div>
+        </fieldset>
     );
 }
 
