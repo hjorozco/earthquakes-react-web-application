@@ -15,7 +15,7 @@ const containerStyle = {
     padding: "20px",
 }
 
-export class EarthquakeMap extends React.Component {
+export class GoogleMap extends React.Component {
 
     render() {
         return (
@@ -42,11 +42,11 @@ export class EarthquakeMap extends React.Component {
                         </div>
                     </InfoWindow>
                 </Map> :
-                <div className="NoMapMessage">Click on an earthquake of the list to see its location map here.</div>
+                null
         );
     }
 }
 
 export default GoogleApiWrapper({
     apiKey: "AIzaSyBAaProJ95Lbn4g7TFeD6R2oelbe01nd_E",
-})(EarthquakeMap)
+})(GoogleMap)

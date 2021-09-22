@@ -225,6 +225,7 @@
 .NoMapMessage {
   margin: 20px 30px;
   font-size: small;
+  grid-row: 4/ 5;
 }
 
 .AboutPage {
@@ -361,7 +362,7 @@
 @media (max-width: 660px) {
   .EarthquakesPage {
     width: 100%;
-    height: 150vh;
+    height: 200vh;
     display: grid;
     grid-template: 50px 50px 2fr 1fr 1fr / 1fr;
   }

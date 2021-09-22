@@ -78,7 +78,7 @@ const App = () => {
     fetchDataFromGeoAPI();
   }, []);
 
-  // When "pinnedEarthquakes" state changes, save it to localStorage
+  // When "pinnedEarthquakes" state changes, save it to localStorage. Also update selectedEarthquake state.
   let mount = useRef();
   useEffect(() => {
     if (!mount.current) {

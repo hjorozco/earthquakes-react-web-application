@@ -2,7 +2,7 @@ import React from 'react';
 import EarthquakesFilters from './EarthquakesFilters';
 import EarthquakeDetails from './EarthquakeDetails';
 import EarthquakesList from './EarthquakesList';
-import EarthquakeMap from './EarthquakeMap';
+import GoogleMap from '../common/GoogleMap';
 
 const EarthquakesPage = props => {
 
@@ -26,7 +26,7 @@ const EarthquakesPage = props => {
                 selectedEarthquake={props.selectedEarthquake}
                 changeSelectedEarthquakePinnedStatus={props.changeSelectedEarthquakePinnedStatus}
             />
-            <EarthquakeMap status={props.status} selectedEarthquake={props.selectedEarthquake} />
+            <GoogleMap status={props.status} selectedEarthquake={props.selectedEarthquake} />
         </div>
     );
 }
