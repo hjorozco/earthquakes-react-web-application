@@ -47,16 +47,31 @@
 }
 
 .Button:hover {
-  /* Brown 800; */
-  background-color: #4E342E;
+  /* Brown 900; */
+  background-color: #3E2723;
 }
 
-.Button:active {
+.Button, .ResetButton:active {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .BoldText {
   font-weight: bold;
+}
+
+.ResetButton {
+  /* Brown 900 */
+  color: #3E2723;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.ResetButton:hover {
+  /* Brown 100 */
+  background-color: #D7CCC8;
 }
 
 .Footer {
@@ -101,7 +116,7 @@
   margin-left: 5px;
 }
 
-.SubmitButton {
+.LastButton {
   margin-left: 20px;
 }
 
@@ -209,8 +224,8 @@
 }
 
 .AboutPage {
-  /* Brown 700 */
-  color: #5D4037;
+  /* Brown 900 */
+  color: #3E2723;
   margin: 20px;
   position: relative;
 }
@@ -219,6 +234,34 @@
   line-height: 1.5;
   margin-bottom: 20px;
   text-indent: 10px;
+}
+
+.CommentsFormTitle {
+  font-weight: bold;
+  font-style: italic;
+  margin: 20px 0px;
+}
+
+.CommentsForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentsInput {
+  margin-bottom: 20px;
+}
+
+.CommentsTextInput {
+  width: 30%;
+}
+
+.CommentsTextAreaInput {
+  width: 60%;
+  height: 300px;
+}
+
+.CommentsFormButtonsContainer{
+  margin-bottom: 20px;
 }
 
 .Icon:hover {
@@ -304,6 +347,12 @@
   .EarthquakesPage {
     grid-template: 50px 50px 1fr / 1fr 1fr;
   }
+  .CommentsTextInput {
+    width: 60%;
+  }
+  .CommentsTextAreaInput {
+    width: 80%;
+  }
 }
 
 @media (max-width: 660px) {
@@ -321,5 +370,11 @@
   }
   .EarthquakeDetails {
     grid-row: 4 / 5;
+  }
+  .CommentsTextInput {
+    width: 100%;
+  }
+  .CommentsTextAreaInput {
+    width: 100%;
   }
 }

@@ -1,6 +1,8 @@
 import React from "react";
+import AboutForm from "./AboutForm";
 
 const AboutPage = () => {
+
     return (
         <div className="Background">
             <div className="AboutPage">
@@ -34,9 +36,14 @@ const AboutPage = () => {
                     and are associated with the browser you are using now. They will not show up on a
                     different device or browser.
                 </div>
-                <div class="AboutParagraph">
+
+                <hr />
+
+                <div className="CommentsFormTitle">
                     Get in touch!
                 </div>
+
+                <AboutForm/>                
             </div>
         </div>
     );
